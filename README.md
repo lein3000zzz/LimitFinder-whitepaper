@@ -170,11 +170,11 @@ and updating configurations from HashiCorp Vault.
   - A unified exchangeInfo structure is used to effortlessly adding new exchanges in the future for ticker collection:
     ```go
     type exchangeInfo struct {
-        useFuturesFlagKey     string
+        useFuturesFlagKey     string // refers to the config key in Vault
         futuresApiUrlKey      string // refers to the config key in Vault
         futuresTickersFunc    func(url string) ([]string, error)
         useSpotTickersFlagKey string // refers to the config key in Vault
-        spotApiUrlKey         string 
+        spotApiUrlKey         string // refers to the config key in Vault
         spotTickersFunc       func(url string) ([]string, error)
     }
     ```
