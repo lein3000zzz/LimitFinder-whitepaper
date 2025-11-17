@@ -173,8 +173,8 @@ and updating configurations from HashiCorp Vault.
         useFuturesFlagKey     string
         futuresApiUrlKey      string // refers to the config key in Vault
         futuresTickersFunc    func(url string) ([]string, error)
-        useSpotTickersFlagKey string
-        spotApiUrlKey         string // refers to the config key in Vault
+        useSpotTickersFlagKey string // refers to the config key in Vault
+        spotApiUrlKey         string 
         spotTickersFunc       func(url string) ([]string, error)
     }
     ```
