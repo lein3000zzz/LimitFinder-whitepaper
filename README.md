@@ -255,22 +255,22 @@ each of which performs a specific function.
 - The flow may be represented like this:
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/ManagerFlow.png?raw=true" alt="🦍"/>
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/BatchFlow.png?raw=true" alt="🦍"/>
+    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/ManagerFlow.png?raw=true" alt="🦍"/>
+    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/BatchFlow.png?raw=true" alt="🦍"/>
 </p>
 
 - Module dependencies may be represented like this:
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/Dependencies.png?raw=true" alt="🦍"/>
+    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/Dependencies.png?raw=true" alt="🦍"/>
 </p>
 
 - Some metrics (maximum recorded values for messages processed per second were about 5k, and that's just the messages incoming
 for the OrderManager, not the split message parts for individual tickers):
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/LFDashboard.png?raw=true" alt="🦍"/>
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/MongoDashboard.png?raw=true" alt="🦍"/>
+    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/LFDashboard.png?raw=true" alt="🦍"/>
+    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/MongoDashboard.png?raw=true" alt="🦍"/>
 </p>
 
 - Overall, the architecture is designed to be modular, resilient, and scalable, allowing for easy addition of new features
@@ -282,7 +282,7 @@ the high frequency of incoming messages from the exchanges' APIs and process the
 <details>
     <summary>Click for a funny picture</summary>
     <p align="center">
-        <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/Atlas.jpg?raw=true" alt="🦍"/>
+        <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/Atlas.jpg?raw=true" alt="🦍"/>
     </p>
 </details>
 
