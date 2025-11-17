@@ -9,7 +9,7 @@ for market orders based on personal user settings to make trading decisions easi
 This document provides a limited and simplified overview for **some of** LimitFinder's features, architecture, and technical details 
 without diving into the actual codebase.
 
-🧭 Currently *two* LimitFinder services are deployed: the main one, collecting data from Binance exchanges, and the secondary one with a running telegram bot instance.
+🧭 Currently *two* LimitFinder services are deployed: the main one, collecting data from the crypto exchanges, and the secondary one with a running telegram bot instance.
 ___
 ### 📌 LimitFinder info
 - Project launched on February 6, 2025
