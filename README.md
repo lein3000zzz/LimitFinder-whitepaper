@@ -9,7 +9,7 @@ for market orders based on personal user settings to make trading decisions easi
 This document provides a limited and simplified overview for **some of** LimitFinder's features, architecture, and technical details 
 without diving into the actual codebase.
 
-🧭 Currently *two* LimitFinder services are deployed: the main one, collecting data from Binance exchanges, and the secondary one with a running telegram bot instance.
+🧭 Currently *two* LimitFinder services are deployed: the main one, collecting data from the crypto exchanges, and the secondary one with a running telegram bot instance.
 ___
 ### 📌 LimitFinder info
 - Project launched on February 6, 2025
@@ -170,10 +170,10 @@ and updating configurations from HashiCorp Vault.
   - A unified exchangeInfo structure is used to effortlessly adding new exchanges in the future for ticker collection:
     ```go
     type exchangeInfo struct {
-        useFuturesFlagKey     string
+        useFuturesFlagKey     string // refers to the config key in Vault
         futuresApiUrlKey      string // refers to the config key in Vault
         futuresTickersFunc    func(url string) ([]string, error)
-        useSpotTickersFlagKey string
+        useSpotTickersFlagKey string // refers to the config key in Vault
         spotApiUrlKey         string // refers to the config key in Vault
         spotTickersFunc       func(url string) ([]string, error)
     }
@@ -255,22 +255,22 @@ each of which performs a specific function.
 - The flow may be represented like this:
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/ManagerFlow.png?raw=true" alt="🦍"/>
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/BatchFlow.png?raw=true" alt="🦍"/>
+    <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/ManagerFlow.png?raw=true" alt="🦍"/>
+    <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/BatchFlow.png?raw=true" alt="🦍"/>
 </p>
 
 - Module dependencies may be represented like this:
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/Dependencies.png?raw=true" alt="🦍"/>
+    <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/Dependencies.png?raw=true" alt="🦍"/>
 </p>
 
 - Some metrics (maximum recorded values for messages processed per second were about 5k, and that's just the messages incoming
 for the OrderManager, not the split message parts for individual tickers):
 
 <p align="center">
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/LFDashboard.png?raw=true" alt="🦍"/>
-    <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/MongoDashboard.png?raw=true" alt="🦍"/>
+    <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/LFDashboard.png?raw=true" alt="🦍"/>
+    <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/MongoDashboard.png?raw=true" alt="🦍"/>
 </p>
 
 - Overall, the architecture is designed to be modular, resilient, and scalable, allowing for easy addition of new features
@@ -282,7 +282,7 @@ the high frequency of incoming messages from the exchanges' APIs and process the
 <details>
     <summary>Click for a funny picture</summary>
     <p align="center">
-        <img align="center" height="300" src="https://github.com/lein3000zzz/LimitFinder-whitepapaer/blob/main/assets/images/readme/Atlas.jpg?raw=true" alt="🦍"/>
+        <img align="center" height="500" src="https://github.com/lein3000zzz/LimitFinder-whitepaper/blob/main/assets/images/readme/Atlas.jpg?raw=true" alt="🦍"/>
     </p>
 </details>
 
