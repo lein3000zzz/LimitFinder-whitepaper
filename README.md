@@ -333,3 +333,105 @@ ___
 the high frequency of incoming detected orders from the data collection service and process them in real-time with minimal latency.
 - Still, the telegram bot service has a bottleneck in the form of telegram API limitations, which include not instantly delivering messages
 and rate limits for sending messages.
+
+___ 
+### API service
+___
+
+- This service offers both RESTful endpoints for retrieving personalized order alerts and a proxy for real-time Centrifugo-based streaming of order updates.
+
+#### ⚙️ Features
+
+- **Personalized Order Retrieval**: Get large limit orders filtered and personalized based on user-specific settings
+- **Real-time Streaming**: Proxy Centrifugo connections for live order updates
+- **JWT Authentication**: Secure API access with JSON Web Tokens
+- **High Performance**: Built with FastHTTP for low-latency responses
+- **Caching**: In-memory caching for efficient data access
+- **MongoDB Integration**: MongoDB change streams for real-time data synchronization
+- **Vault Configuration**: Secure configuration management with HashiCorp Vault
+
+#### 🎹 Tech Stack Choices
+
+- **Web Framework**: FastHTTP for high-performance HTTP handling
+- **Database sync**: MongoDB change streams for real-time data updates
+- **Authentication**: JWT tokens with custom validation
+- **Real-time Communication**: Centrifugo proxy for WebSocket-based streaming
+- **Configuration Management**: HashiCorp Vault for secure config storage
+
+#### Core Components
+
+- **Main Application**: Orchestrates all components and manages server lifecycle
+- **Data Manager**: Handles MongoDB interactions, caching, and change stream watching
+- **User Registry**: Manages user settings and personalization logic
+  - The user settings are the same as in the telegram bot service
+- **Stream Manager**: Coordinates real-time event streaming via Centrifugo
+- **Handlers**:
+  - LfApiFastHttpHandler: Processes orders API requests
+  - CentrifugoProxyHandler: Proxies Centrifugo connections
+- **JWT Validator**: Authenticates and extracts client information from tokens
+
+#### Data Flow
+
+1. **Orders Retrieval**:
+   - Client sends authenticated request to / endpoint
+   - JWT validated and client ID extracted
+   - Cached orders fetched from DataManager
+   - Orders personalized based on user settings
+   - Filtered results returned as JSON
+
+2. **Real-time Streaming**:
+   - Client connects via Centrifugo proxy endpoints
+   - Authentication handled through JWT in connection data
+   - Stream Manager publishes order events to subscribed clients
+   - Presence synchronization maintains active connection tracking
+
+#### Caching Strategy
+
+- Orders cached in memory with periodic updates
+- Cache invalidation triggered by MongoDB change streams
+- Fallback to direct database queries if cache unavailable
+
+___
+### 📊 Stats Service
+___
+
+- LFRebornStats is a real-time statistics collection and analysis service within the LimitFinder ecosystem. 
+It processes large limit order events, performs technical analysis using historical market data, generates visual charts, and delivers actionable insights via Telegram notifications.
+
+#### 🚀 Features
+
+- **Real-time Event Processing**: Connects to Centrifuge-based event streams for live order book updates
+- **Advanced Order Analysis**: Performs comprehensive technical analysis including price breaches, profit calculations, and market maker detection
+- **Chart Generation**: Creates professional financial charts with annotations using Chart.js and Canvas API
+- **Telegram Integration**: Sends formatted analysis reports with embedded charts to dedicated channels
+- **JWT Authentication**: Secure communication with the LimitFinder API service
+- **High Performance**: Built with Bun runtime for optimal performance and low latency
+
+#### Core Components
+
+- **Communicator**: Manages Centrifuge WebSocket connection and event subscription
+- **Processor**: Handles incoming order events and orchestrates analysis workflow
+- **Analyzer**: Performs technical analysis using Binance historical klines data
+- **Chart Generator**: Creates visual representations of order analysis with annotations
+- **Bot Sender**: Delivers formatted reports to Telegram channels
+
+#### Data Flow
+
+1. **Event Reception**: Receives real-time order change events via Centrifuge subscription
+2. **Order Processing**: Filters and validates incoming order data
+3. **Technical Analysis**: Fetches historical klines, calculates metrics, and generates insights
+4. **Chart Creation**: Renders professional charts with price annotations and indicators
+5. **Notification Delivery**: Sends analysis reports to configured Telegram channels
+
+#### 📊 Analysis Features
+
+- **Price Breach Detection**: Monitors if order prices are reached by market movements
+- **Profit Calculations**: Estimates potential profits from order execution
+- **Market Maker Probability**: Assesses likelihood of orders being placed by market makers
+- **Order Lifespan**: Tracks duration orders remain active in the order book
+- **Bounce Analysis**: Counts price rejections and support/resistance interactions
+- **Zone Hits**: Measures interactions with key price levels
+- **Candlestick Charts**: Standard financial charting with 1-minute intervals
+- **Order Annotations**: Visual markers for order prices and analysis points
+- **Price Levels**: Support/resistance zones and key technical levels
+- **Time-based Analysis**: Historical context for order behavior
