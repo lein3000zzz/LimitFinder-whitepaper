@@ -333,3 +333,60 @@ ___
 the high frequency of incoming detected orders from the data collection service and process them in real-time with minimal latency.
 - Still, the telegram bot service has a bottleneck in the form of telegram API limitations, which include not instantly delivering messages
 and rate limits for sending messages.
+
+___ 
+### API service
+___
+
+- This service offers both RESTful endpoints for retrieving personalized order alerts and a proxy for real-time Centrifugo-based streaming of order updates.
+
+#### ⚙️ Features
+
+- **Personalized Order Retrieval**: Get large limit orders filtered and personalized based on user-specific settings
+- **Real-time Streaming**: Proxy Centrifugo connections for live order updates
+- **JWT Authentication**: Secure API access with JSON Web Tokens
+- **High Performance**: Built with FastHTTP for low-latency responses
+- **Caching**: In-memory caching for efficient data access
+- **MongoDB Integration**: MongoDB change streams for real-time data synchronization
+- **Vault Configuration**: Secure configuration management with HashiCorp Vault
+
+#### 🎹 Tech Stack Choices
+
+- **Web Framework**: FastHTTP for high-performance HTTP handling
+- **Database sync**: MongoDB change streams for real-time data updates
+- **Authentication**: JWT tokens with custom validation
+- **Real-time Communication**: Centrifugo proxy for WebSocket-based streaming
+- **Configuration Management**: HashiCorp Vault for secure config storage
+
+#### Core Components
+
+- **Main Application**: Orchestrates all components and manages server lifecycle
+- **Data Manager**: Handles MongoDB interactions, caching, and change stream watching
+- **User Registry**: Manages user settings and personalization logic
+  - The user settings are the same as in the telegram bot service
+- **Stream Manager**: Coordinates real-time event streaming via Centrifugo
+- **Handlers**:
+  - LfApiFastHttpHandler: Processes orders API requests
+  - CentrifugoProxyHandler: Proxies Centrifugo connections
+- **JWT Validator**: Authenticates and extracts client information from tokens
+
+#### Data Flow
+
+1. **Orders Retrieval**:
+   - Client sends authenticated request to / endpoint
+   - JWT validated and client ID extracted
+   - Cached orders fetched from DataManager
+   - Orders personalized based on user settings
+   - Filtered results returned as JSON
+
+2. **Real-time Streaming**:
+   - Client connects via Centrifugo proxy endpoints
+   - Authentication handled through JWT in connection data
+   - Stream Manager publishes order events to subscribed clients
+   - Presence synchronization maintains active connection tracking
+
+#### Caching Strategy
+
+- Orders cached in memory with periodic updates
+- Cache invalidation triggered by MongoDB change streams
+- Fallback to direct database queries if cache unavailable
