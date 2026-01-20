@@ -390,3 +390,48 @@ ___
 - Orders cached in memory with periodic updates
 - Cache invalidation triggered by MongoDB change streams
 - Fallback to direct database queries if cache unavailable
+
+___
+### 📊 Stats Service
+___
+
+- LFRebornStats is a real-time statistics collection and analysis service within the LimitFinder ecosystem. 
+It processes large limit order events, performs technical analysis using historical market data, generates visual charts, and delivers actionable insights via Telegram notifications.
+
+#### 🚀 Features
+
+- **Real-time Event Processing**: Connects to Centrifuge-based event streams for live order book updates
+- **Advanced Order Analysis**: Performs comprehensive technical analysis including price breaches, profit calculations, and market maker detection
+- **Chart Generation**: Creates professional financial charts with annotations using Chart.js and Canvas API
+- **Telegram Integration**: Sends formatted analysis reports with embedded charts to dedicated channels
+- **JWT Authentication**: Secure communication with the LimitFinder API service
+- **High Performance**: Built with Bun runtime for optimal performance and low latency
+
+#### Core Components
+
+- **Communicator**: Manages Centrifuge WebSocket connection and event subscription
+- **Processor**: Handles incoming order events and orchestrates analysis workflow
+- **Analyzer**: Performs technical analysis using Binance historical klines data
+- **Chart Generator**: Creates visual representations of order analysis with annotations
+- **Bot Sender**: Delivers formatted reports to Telegram channels
+
+#### Data Flow
+
+1. **Event Reception**: Receives real-time order change events via Centrifuge subscription
+2. **Order Processing**: Filters and validates incoming order data
+3. **Technical Analysis**: Fetches historical klines, calculates metrics, and generates insights
+4. **Chart Creation**: Renders professional charts with price annotations and indicators
+5. **Notification Delivery**: Sends analysis reports to configured Telegram channels
+
+#### 📊 Analysis Features
+
+- **Price Breach Detection**: Monitors if order prices are reached by market movements
+- **Profit Calculations**: Estimates potential profits from order execution
+- **Market Maker Probability**: Assesses likelihood of orders being placed by market makers
+- **Order Lifespan**: Tracks duration orders remain active in the order book
+- **Bounce Analysis**: Counts price rejections and support/resistance interactions
+- **Zone Hits**: Measures interactions with key price levels
+- **Candlestick Charts**: Standard financial charting with 1-minute intervals
+- **Order Annotations**: Visual markers for order prices and analysis points
+- **Price Levels**: Support/resistance zones and key technical levels
+- **Time-based Analysis**: Historical context for order behavior
