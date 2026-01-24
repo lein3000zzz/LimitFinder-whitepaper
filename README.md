@@ -392,7 +392,7 @@ ___
 - Fallback to direct database queries if cache unavailable
 
 ___
-### 📊 Stats Service
+### 📊 [Stats Service](https://t.me/LimitFinderStats)
 ___
 
 - LFRebornStats is a real-time statistics collection and analysis service within the LimitFinder ecosystem. 
